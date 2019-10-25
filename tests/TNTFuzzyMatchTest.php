@@ -82,7 +82,9 @@ class TNTFuzzyMatchTest extends PHPUnit\Framework\TestCase
 
     public function testFuzzyMatchFromFileFunction()
     {
-        $res = fuzzyMatchFromFile('search', __DIR__.'/_files/english_wordlist_2k.txt');
+	    $fm = new \TeamTNT\TNTSearch\TNTFuzzyMatch;
+
+	    $res = $fm->fuzzyMatchFromFile('search', __DIR__ . '/_files/english_wordlist_2k.txt');
 
         $equal = bccomp($res['search'], 1.2, 2);
         $this->assertEquals(0, $equal);
@@ -104,7 +106,9 @@ class TNTFuzzyMatchTest extends PHPUnit\Framework\TestCase
 
     public function testFuzzyMatchFunction()
     {
-        $res = fuzzyMatch('search', ['search', 'research', 'something']);
+	    $fm = new \TeamTNT\TNTSearch\TNTFuzzyMatch;
+
+	    $res = $fm->fuzzyMatch('search', ['search', 'research', 'something']);
 
         $equal = bccomp($res['search'], 1.2, 2);
         $this->assertEquals(0, $equal);

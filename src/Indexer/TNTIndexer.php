@@ -328,7 +328,10 @@ class TNTIndexer
             } elseif (is_array($this->config['extension'])) {
                 $includeFile = in_array($object->getExtension(), $this->config['extension']);
             } else {
-                $includeFile = stringEndsWith($name, $this->config['extension']);
+	            // search forward starting from end minus needle length characters
+	            $temp = strlen($name) - strlen($this->config['extension']);
+
+	            $includeFile = $this->config['extension'] === "" || ($temp >= 0 && strpos($name, $this->config['extension'], $temp) !== false);
             }
 
             if ($includeFile && !in_array($name, $exclude)) {
